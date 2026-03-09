@@ -428,6 +428,33 @@ img {
   box-shadow: var(--shadow);
 }
 
+.tour-accordion {
+  display: grid;
+  gap: 0.65rem;
+}
+
+.tour-accordion details {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: #f8fbf7;
+  padding: 0.3rem 0.75rem;
+}
+
+.tour-accordion summary {
+  cursor: pointer;
+  font-weight: 700;
+  color: var(--dark-green);
+  padding: 0.5rem 0.1rem;
+}
+
+.tour-accordion details[open] summary {
+  color: var(--primary-green);
+}
+
+.tour-accordion p {
+  margin: 0.35rem 0 0.8rem;
+}
+
 @media (max-width: 960px) {
   .grid-3 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
