@@ -46,13 +46,9 @@ function setupDropdowns() {
 }
 
 function markActiveLinks() {
-  const currentPath = normalizePath(location.pathname);
+  const currentKey = getCurrentNavKey(normalizePath(location.pathname));
   document.querySelectorAll('a[data-nav-link]').forEach((link) => {
-    const href = link.getAttribute('href');
-    if (!href) return;
-
-    const targetPath = normalizePath(new URL(href, location.href).pathname);
-    if (targetPath === currentPath) {
+    if (link.dataset.navKey === currentKey) {
       link.setAttribute('aria-current', 'page');
     } else {
       link.removeAttribute('aria-current');
@@ -63,6 +59,30 @@ function markActiveLinks() {
 function normalizePath(pathname) {
   const normalized = pathname.replace(/\/+$/, '');
   return normalized === '' ? '/index.html' : normalized;
+}
+
+function getCurrentNavKey(pathname) {
+  if (pathname === '/index.html' || pathname.endsWith('/index.html') && !pathname.includes('/reisen/')) {
+    return pathname.includes('/reisen/') ? 'reisen' : 'start';
+  }
+
+  if (pathname.includes('/reisen/')) {
+    return 'reisen';
+  }
+
+  if (pathname.endsWith('/handicap-team.html')) {
+    return 'handicap';
+  }
+
+  if (pathname.endsWith('/ueber-wanderreisen.html')) {
+    return 'ueber';
+  }
+
+  if (pathname.endsWith('/kontakt.html')) {
+    return 'kontakt';
+  }
+
+  return '';
 }
 
 function setYear() {
